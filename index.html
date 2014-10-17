@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Color Generator</title>
+  <title>Adaptable Swatch Generator</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
@@ -876,7 +876,7 @@
   <!-- /SVGS -->
 
   <header class="main-header">
-    <h1>Color Generator</h1>
+    <h1>Adaptable Swatch Generator</h1>
   </header>
 
   <div class="container">
@@ -889,9 +889,7 @@
           <use xlink:href="#ico-minus"></use>
         </svg>
       </a>
-      <form action="/" id="item-form">
-        <input id="item-count" type="text" value="0"></input>
-      </form>
+      <input id="item-count" type="text"></input>
       <a class="button add-item">
         <svg viewBox="0 0 30 30" class="ico-plus">
           <use xlink:href="#ico-plus"></use>
@@ -992,6 +990,8 @@
           decrementValue();
           $("#item-count").val(quantity);
 
+        } else if (quantity == 0) {
+
         } else {
           $("#color-swatches").children().remove();
           decrementValue();
@@ -1007,42 +1007,22 @@
 
       });
 
-      $("#item-count").change(function() {
-        console.log("i'm working at all");
-        // console.log($(this).val());
-        // $("#color-swatches").children().remove();
-        // rainbow.setNumberRange(0, quantity);
-        // generateItem();
+      $("#item-count").on('keyup', function() {
 
-        // $("#hex-values-box").children().remove();
-        // outputHexList();
+        if ( $(this).val() == '' ) {
+          quantity = 0;
+        } else {
+          console.log($("#item-count").val())
+          quantity = $(this).val();
+
+          $("#color-swatches").children().remove();
+          rainbow.setNumberRange(0, quantity);
+          generateItem();
+
+          $("#hex-values-box").children().remove();
+          outputHexList();
+        }
       });
-
-
-      // - - - - - - - - - -
-
-
-      // function gradient() {
-
-      //   // Define gradient variable
-      //   var gradient;
-      //     // var minNum = 0;
-      //     // var maxNum = 100;
-
-      //   // Set (beginning and ending?) colors
-      //   var colors = ["ff0000", "0000ff"];
-
-      //   function setColors(spectrum) {
-      //     if (spectrum.length < 2) {
-      //       return "red";
-      //     } else {
-      //       // var increment = (maxNum - minNum)/(spectrum.length - 1)
-      //       var increment = 100/(spectrum.length - 1);
-
-      //     }
-      //   }; // setColors
-
-      // } // gradient
 
     });
   </script>
