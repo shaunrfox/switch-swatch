@@ -6,7 +6,28 @@ $(document).ready(function() {
   // Making random array stuff
   var rainbow = new Rainbow(); // by default, range is 0 to 100
 
-  rainbow.setSpectrum('#f1da0e', '#c7da2e', '#72bf44', '#01a7a3', '#00a8d4', '#6575ae', '#5b2874', '#8e4879', '#d61f26');
+  customSpectrum = ['#f1da0e', '#c7da2e', '#72bf44', '#01a7a3', '#00a8d4', '#6575ae', '#5b2874', '#8e4879', '#d61f26'];
+
+  rainbow.setSpectrum.apply(null, customSpectrum)
+
+
+  $("button.add-starting-hex").click(function(){
+  	swatches = $("#add-starting-hex").val();
+  	swatches = swatches.replace(/\s+/, "").replace(/[#"']/g,"").split(",")
+  	swatches = swatches.map(function(swatch){
+  		return "#" + swatch
+  	});
+
+  	rainbow.setSpectrum.apply(null, swatches)
+  	$("#add-starting-hex").val("");
+  });
+
+  $('#add-starting-hex').on('keyup', function(e) {
+    if (e.which == 13) {
+        $("button.add-starting-hex").click();
+    }
+});
+
 
   // Increment Value
   function incrementValue() {
