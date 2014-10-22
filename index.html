@@ -13,6 +13,7 @@
 
   <script src="assets/js/jquery-2.0.3.min.js"></script>
   <script src="assets/js/rainbowvis.js"></script>
+  <script src="assets/js/swatch-generator.js"></script>
 
 </head>
 <body>
@@ -879,25 +880,12 @@
     <h1>Adaptable Swatch Generator</h1>
   </header>
 
-  <div class="container">
-
     <div class="starting-color-stops"></div>
 
-    <div class="item-controls">
-      <a class="button subtract-item">
-        <svg viewBox="0 0 30 30" class="ico-minus">
-          <use xlink:href="#ico-minus"></use>
-        </svg>
-      </a>
-      <input id="item-count" type="text"></input>
-      <a class="button add-item">
-        <svg viewBox="0 0 30 30" class="ico-plus">
-          <use xlink:href="#ico-plus"></use>
-        </svg>
-      </a>
-    </div>
-
     <div class="input-colors">
+      <header class="section-header">
+        Add Some base hex values
+      </header>
       <div class="input-form">
         <form action="">
           <input id="add-starting-hex" type="text"></input>
@@ -911,121 +899,30 @@
     </div>
 
     <div class="color-swatches">
+      <header class="section-header">
+        <span>Generated Swatches</span>
+
+        <div class="item-controls">
+          <a class="button subtract-item">
+            <svg viewBox="0 0 30 30" class="ico-minus">
+              <use xlink:href="#ico-minus"></use>
+            </svg>
+          </a>
+          <input id="item-count" type="text"></input>
+          <a class="button add-item">
+            <svg viewBox="0 0 30 30" class="ico-plus">
+              <use xlink:href="#ico-plus"></use>
+            </svg>
+          </a>
+        </div>
+
+      </header>
       <ul id="color-swatches">
       </ul>
+      <div class="hex-values-box">
+        <ul id="hex-values-box"></ul>
+      </div>
     </div>
-
-    <div class="hex-values-box">
-      <ul id="hex-values-box"></ul>
-    </div>
-
-  </div>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-
-      // Count
-      var quantity = 0;
-
-      // Making random array stuff
-      var rainbow = new Rainbow(); // by default, range is 0 to 100
-
-      rainbow.setSpectrum('#f1da0e', '#c7da2e', '#72bf44', '#01a7a3', '#00a8d4', '#6575ae', '#5b2874', '#8e4879', '#d61f26');
-
-      // Increment Value
-      function incrementValue() {
-        quantity += 1;
-      };
-
-      // Decrement Value
-      function decrementValue() {
-        quantity -= 1;
-      };
-
-      // Generate li's
-      function generateItem() {
-        var s = ''
-
-        // Hex List
-        hexList = [];
-
-        for (var i = quantity; i > 0; i--) {
-          var hex = '#' + rainbow.colourAt(i);
-          hexList.push(hex);
-          s += '<li style="background-color:' + hex + '">' + hex + '</li>';
-        }
-
-        $("#color-swatches").append(s);
-      }
-
-      function outputHexList() {
-        var h = '';
-        for (var i = 0; i < quantity; i++) {
-          h += '<li><span class="swatch" style="background:' + hexList[i] +'"></span>' + hexList[i] + '"<span class="comma">,</span>&nbsp;</li>';
-        }
-
-        $("#hex-values-box").append(h);
-      }
-
-      // Add Items
-      $(".add-item").click(function() {
-        $("#color-swatches").children().remove();
-        incrementValue();
-        rainbow.setNumberRange(0, quantity);
-        generateItem();
-
-        $("#hex-values-box").children().remove();
-        outputHexList();
-        console.log(hexList);
-
-        $("#item-count").val(quantity);
-      });
-
-      // Subtract Items
-      $(".subtract-item").click(function() {
-
-        if ( quantity == 1 ) {
-          $("#hex-values-box").children().remove();
-          $("#color-swatches").children().remove();
-          decrementValue();
-          $("#item-count").val(quantity);
-
-        } else if (quantity == 0) {
-
-        } else {
-          $("#color-swatches").children().remove();
-          decrementValue();
-          rainbow.setNumberRange(0, quantity);
-          generateItem();
-
-          $("#hex-values-box").children().remove();
-          outputHexList();
-          console.log(hexList);
-
-          $("#item-count").val(quantity);
-        }
-
-      });
-
-      $("#item-count").on('keyup', function() {
-
-        if ( $(this).val() == '' ) {
-          quantity = 0;
-        } else {
-          console.log($("#item-count").val())
-          quantity = $(this).val();
-
-          $("#color-swatches").children().remove();
-          rainbow.setNumberRange(0, quantity);
-          generateItem();
-
-          $("#hex-values-box").children().remove();
-          outputHexList();
-        }
-      });
-
-    });
-  </script>
 
 </body>
 </html>
