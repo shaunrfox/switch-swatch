@@ -123,6 +123,7 @@ ul {
       position: absolute;
       top: 0;
       width: 260px;
+      height: 50px;
       bottom: 0;
       left: 0;
       padding: 0 50px 0 10px;
@@ -136,6 +137,75 @@ ul {
       position: absolute;
       top: 10px;
       right: 10px;
+    }
+  }
+}
+
+#starting-swatches {
+  position: absolute;
+  top: 140px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  // margin: 20px;
+  padding: 10px;
+  background: $white;
+  overflow: auto;
+
+  .starting-swatch {
+    position: relative;
+    width: 69px;
+    height: 89px;
+    margin: 5px;
+    float: left;
+    padding: 10px;
+    @include border-radius-all(4px);
+    @include box-shadow(1px 1px 2px rgba($off-black, .4));
+    overflow: hidden;
+    @include transition(all ease 200ms);
+
+    &:nth-child(3n) { margin-right: 0; }
+
+    span {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba($off-black, .4);
+      color: $white;
+      @include font-size(1.2);
+      padding: 8px 0 5px;
+      display: block;
+      text-align: center;
+      width: 100%;
+      @include border-radius(0, 0, 4px, 4px);
+    }
+
+    svg {
+      position: absolute;
+      top: -30px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      background: rgba($off-black, .4);
+      fill: $white;
+      // @include border-radius-all(20px);
+      @include transition(top ease 200ms);
+    }
+
+    &:hover {
+
+      svg {
+        top: 0;
+        display: block;
+
+        &:hover {
+          cursor: pointer;
+          background: $red;
+        }
+
+        &:active { background: darken($red, 10); }
+      }
     }
   }
 }

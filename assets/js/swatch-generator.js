@@ -8,8 +8,19 @@ $(document).ready(function() {
 
   customSpectrum = ['#f1da0e', '#c7da2e', '#72bf44', '#01a7a3', '#00a8d4', '#6575ae', '#5b2874', '#8e4879', '#d61f26'];
 
-  rainbow.setSpectrum.apply(null, customSpectrum)
+  swatches = customSpectrum;
 
+  function getSwatches() {
+    $("#starting-swatches").children().remove();
+    for (var i = 0; i < customSpectrum.length; i++) {
+      // console.log(customSpectrum[i]);
+      $("#starting-swatches").append('<div class="starting-swatch" style="background:' + customSpectrum[i] + ';"><span>' + customSpectrum[i] + '</span><svg viewBox="0 0 30 30" class="ico-close"><use xlink:href="#ico-close"></use></svg></div>')
+    }
+  }
+
+  getSwatches();
+
+  rainbow.setSpectrum.apply(null, customSpectrum);
 
   $("button.add-starting-hex").click(function(){
   	swatches = $("#add-starting-hex").val();
@@ -20,14 +31,15 @@ $(document).ready(function() {
 
   	rainbow.setSpectrum.apply(null, swatches)
   	$("#add-starting-hex").val("");
+    getSwatches();
   });
 
   $('#add-starting-hex').on('keyup', function(e) {
     if (e.which == 13) {
-        $("button.add-starting-hex").click();
+      $("button.add-starting-hex").click();
+      getSwatches();
     }
-});
-
+  });
 
   // Increment Value
   function incrementValue() {
