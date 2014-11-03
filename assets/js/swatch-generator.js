@@ -58,13 +58,14 @@ $(document).ready(function() {
     // Hex List
     hexList = [];
 
-    for (var i = quantity; i > 0; i--) {
+    for (var i = 0; i < quantity; i++) {
       var hex = '#' + rainbow.colourAt(i);
       hexList.push(hex);
       s += '<li style="background-color:' + hex + '"><span>' + hex + '</span></li>';
     }
 
     $("#generated-swatches").append(s);
+    console.log(hexList);
   }
 
   function outputHexList() {
