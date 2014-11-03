@@ -61,10 +61,10 @@ $(document).ready(function() {
     for (var i = quantity; i > 0; i--) {
       var hex = '#' + rainbow.colourAt(i);
       hexList.push(hex);
-      s += '<li style="background-color:' + hex + '">' + hex + '</li>';
+      s += '<li style="background-color:' + hex + '"><span>' + hex + '</span></li>';
     }
 
-    $("#color-swatches").append(s);
+    $("#generated-swatches").append(s);
   }
 
   function outputHexList() {
@@ -78,7 +78,7 @@ $(document).ready(function() {
 
   // Add Items
   $(".add-item").click(function() {
-    $("#color-swatches").children().remove();
+    $("#generated-swatches").children().remove();
     incrementValue();
     rainbow.setNumberRange(0, quantity);
     generateItem();
@@ -96,14 +96,14 @@ $(document).ready(function() {
 
     if ( quantity == 1 ) {
       $("#hex-values-box").children().remove();
-      $("#color-swatches").children().remove();
+      $("#generated-swatches").children().remove();
       decrementValue();
       $("#item-count").val(quantity);
 
     } else if (quantity == 0) {
 
     } else {
-      $("#color-swatches").children().remove();
+      $("#generated-swatches").children().remove();
       decrementValue();
       rainbow.setNumberRange(0, quantity);
       generateItem();
@@ -126,7 +126,7 @@ $(document).ready(function() {
       console.log($("#item-count").val())
       quantity = parseInt($(this).val());
 
-      $("#color-swatches").children().remove();
+      $("#generated-swatches").children().remove();
       rainbow.setNumberRange(0, quantity);
       generateItem();
 
