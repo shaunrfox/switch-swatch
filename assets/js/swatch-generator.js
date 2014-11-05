@@ -71,7 +71,7 @@ $(document).ready(function() {
   function outputHexList() {
     var h = '';
     for (var i = 0; i < quantity; i++) {
-      h += '<li><span class="swatch" style="background:' + hexList[i] +'"></span>' + hexList[i] + '"<span class="comma">,</span>&nbsp;</li>';
+      h += '<li><span class="swatch" style="background:' + hexList[i] +'"></span>"' + hexList[i] + '"<span class="comma">,</span>&nbsp;</li>';
     }
 
     $("#hex-values-box").append(h);
@@ -81,7 +81,7 @@ $(document).ready(function() {
   $(".add-item").click(function() {
     $("#generated-swatches").children().remove();
     incrementValue();
-    rainbow.setNumberRange(0, quantity);
+    rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
     generateItem();
     console.log(quantity);
 
@@ -106,7 +106,7 @@ $(document).ready(function() {
     } else {
       $("#generated-swatches").children().remove();
       decrementValue();
-      rainbow.setNumberRange(0, quantity);
+      rainbow.setNumberRange(0, quantity == 1 ? quantity : quantity-1);
       generateItem();
 
       $("#hex-values-box").children().remove();
@@ -128,7 +128,7 @@ $(document).ready(function() {
       quantity = parseInt($(this).val());
 
       $("#generated-swatches").children().remove();
-      rainbow.setNumberRange(0, quantity);
+      rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
       generateItem();
 
       $("#hex-values-box").children().remove();
