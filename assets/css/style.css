@@ -968,7 +968,8 @@ ul {
   padding: 10px;
   background: #fff;
   overflow: auto; }
-  #starting-swatches .starting-swatch {
+  #starting-swatches .starting-swatch,
+  #starting-swatches .sortable-placeholder {
     position: relative;
     width: 69px;
     height: 89px;
@@ -986,9 +987,14 @@ ul {
     -moz-transition: all ease 200ms;
     -o-transition: all ease 200ms;
     transition: all ease 200ms; }
-    #starting-swatches .starting-swatch:nth-child(3n) {
+    #starting-swatches .starting-swatch:hover,
+    #starting-swatches .sortable-placeholder:hover {
+      cursor: move; }
+    #starting-swatches .starting-swatch:nth-child(3n),
+    #starting-swatches .sortable-placeholder:nth-child(3n) {
       margin-right: 0; }
-    #starting-swatches .starting-swatch span {
+    #starting-swatches .starting-swatch span,
+    #starting-swatches .sortable-placeholder span {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -1004,7 +1010,8 @@ ul {
       -webkit-border-radius: 0 0 4px 4px;
       -moz-border-radius: 0 0 4px 4px;
       border-radius: 0 0 4px 4px; }
-    #starting-swatches .starting-swatch svg {
+    #starting-swatches .starting-swatch svg,
+    #starting-swatches .sortable-placeholder svg {
       position: absolute;
       top: -30px;
       right: 0;
@@ -1016,14 +1023,22 @@ ul {
       -moz-transition: top ease 200ms;
       -o-transition: top ease 200ms;
       transition: top ease 200ms; }
-    #starting-swatches .starting-swatch:hover svg {
+    #starting-swatches .starting-swatch:hover svg,
+    #starting-swatches .sortable-placeholder:hover svg {
       top: 0;
       display: block; }
-      #starting-swatches .starting-swatch:hover svg:hover {
+      #starting-swatches .starting-swatch:hover svg:hover,
+      #starting-swatches .sortable-placeholder:hover svg:hover {
         cursor: pointer;
         background: #ed1c24; }
-      #starting-swatches .starting-swatch:hover svg:active {
+      #starting-swatches .starting-swatch:hover svg:active,
+      #starting-swatches .sortable-placeholder:hover svg:active {
         background: #c61017; }
+  #starting-swatches .sortable-placeholder {
+    background: #ccc;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none; }
 
 .color-swatches {
   display: block;

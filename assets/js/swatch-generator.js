@@ -25,6 +25,11 @@ $(document).ready(function() {
 
   rainbow.setSpectrum.apply(null, customSpectrum);
 
+  $("#item-count").val("18");
+  quantity = 18;
+  rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
+  generateItems();
+
   // Add new starting swatches
   $("button.add-starting-hex").on("click", function(){
 
@@ -170,8 +175,17 @@ $(document).ready(function() {
   });
 
   // Sortable stuff
-  $("#starting-swatches").sortable();
+  $("#starting-swatches").sortable({
+    placeholder: "sortable-placeholder"
+  });
 
+  // getter
+  var placeholder = $( "#starting-swatches" ).sortable( "option", "placeholder" );
+
+  // setter
+  $( "#starting-swatches" ).sortable( "option", "placeholder", "sortable-placeholder" );
+
+  // $("#starting-swatches").sortable().bind('sortupdate', function() {
   $("#starting-swatches").on("sortstop", function() {
     var getSpanText = $("#starting-swatches > div > span").text().split('#');
 

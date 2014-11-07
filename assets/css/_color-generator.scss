@@ -152,7 +152,8 @@ ul {
   background: $white;
   overflow: auto;
 
-  .starting-swatch {
+  .starting-swatch,
+  .sortable-placeholder {
     position: relative;
     width: 69px;
     height: 89px;
@@ -163,6 +164,8 @@ ul {
     @include box-shadow(1px 1px 2px rgba($off-black, .4));
     overflow: hidden;
     @include transition(all ease 200ms);
+
+    &:hover { cursor: move; }
 
     &:nth-child(3n) { margin-right: 0; }
 
@@ -207,6 +210,11 @@ ul {
         &:active { background: darken($red, 10); }
       }
     }
+  }
+
+  .sortable-placeholder {
+    background: $light-grey;
+    @include box-shadow(none);
   }
 }
 
