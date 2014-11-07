@@ -6,32 +6,54 @@ $(document).ready(function() {
   // Making random array stuff
   var rainbow = new Rainbow(); // by default, range is 0 to 100
 
+  // Default starting swatches
   customSpectrum = ['#f1da0e', '#c7da2e', '#72bf44', '#01a7a3', '#00a8d4', '#6575ae', '#5b2874', '#8e4879', '#d61f26'];
 
-  swatches = customSpectrum;
-
+  // Function to print out starting swatches
   function getSwatches() {
     $("#starting-swatches").children().remove();
     for (var i = 0; i < customSpectrum.length; i++) {
       // console.log(customSpectrum[i]);
       $("#starting-swatches").append('<div class="starting-swatch" style="background:' + customSpectrum[i] + ';"><span>' + customSpectrum[i] + '</span><svg viewBox="0 0 30 30" class="ico-close"><use xlink:href="#ico-close"></use></svg></div>')
     }
+
+    rainbow.setSpectrum.apply(null, customSpectrum);
   }
 
+  // Print out starting swatches
   getSwatches();
 
   rainbow.setSpectrum.apply(null, customSpectrum);
 
-  $("button.add-starting-hex").click(function(){
-  	swatches = $("#add-starting-hex").val();
-  	swatches = swatches.replace(/\s+/, "").replace(/[#"']/g,"").split(",")
-  	swatches = swatches.map(function(swatch){
-  		return "#" + swatch
-  	});
+  // Add new starting swatches
+  $("button.add-starting-hex").on("click", function(){
 
-  	rainbow.setSpectrum.apply(null, swatches)
+    // Capture and store values from input
+    newSwatches = $("#add-starting-hex").val();
+    // customSpectrum = $("#add-starting-hex").val()
+
+    // Push new values into array
+  	customSpectrum.push(newSwatches);
+
+    // Clean array from extraneous characters
+  	// customSpectrum = customSpectrum.replace(/\s+/, "").replace(/[#"']/g,"").split(",")
+  	// customSpectrum = customSpectrum.map(function(swatch){
+  	// 	return "#" + swatch
+  	// });
+
+    console.log(customSpectrum);
+
+    // Send new values to rainbowvis
+  	rainbow.setSpectrum.apply(null, customSpectrum);
+
+    // Clear out value field
   	$("#add-starting-hex").val("");
+
+    // Print all new swatches
     getSwatches();
+
+    // Print all generated swatches
+    generateItems();
   });
 
   $('#add-starting-hex').on('keyup', function(e) {
@@ -39,6 +61,24 @@ $(document).ready(function() {
       $("button.add-starting-hex").click();
       getSwatches();
     }
+  });
+
+  // Remove swatch from array
+  $("#starting-swatches").on("click", ".starting-swatch > svg", function() {
+    removeThisSwatch = $(this).siblings().text();
+    console.log(removeThisSwatch);
+
+    $(this).parent().remove();
+
+    console.log(customSpectrum);
+
+    customSpectrum = $.grep(customSpectrum, function(value) {
+      return value != removeThisSwatch;
+    });
+
+    getSwatches();
+
+    generateItems();
   });
 
   // Increment Value
@@ -52,11 +92,13 @@ $(document).ready(function() {
   };
 
   // Generate li's
-  function generateItem() {
+  function generateItems() {
     var s = ''
 
     // Hex List
     hexList = [];
+
+    $("#generated-swatches").children().remove();
 
     for (var i = 0; i < quantity; i++) {
       var hex = '#' + rainbow.colourAt(i);
@@ -65,10 +107,14 @@ $(document).ready(function() {
     }
 
     $("#generated-swatches").append(s);
-    console.log(hexList);
+
+    outputHexList();
   }
 
+  // HexList
   function outputHexList() {
+    $("#hex-values-box").children().remove();
+
     var h = '';
     for (var i = 0; i < quantity; i++) {
       h += '<li><span class="swatch" style="background:' + hexList[i] +'"></span>"' + hexList[i] + '"<span class="comma">,</span>&nbsp;</li>';
@@ -82,12 +128,7 @@ $(document).ready(function() {
     $("#generated-swatches").children().remove();
     incrementValue();
     rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
-    generateItem();
-    console.log(quantity);
-
-    $("#hex-values-box").children().remove();
-    outputHexList();
-    // console.log(hexList);
+    generateItems();
 
     $("#item-count").val(quantity);
   });
@@ -107,18 +148,13 @@ $(document).ready(function() {
       $("#generated-swatches").children().remove();
       decrementValue();
       rainbow.setNumberRange(0, quantity == 1 ? quantity : quantity-1);
-      generateItem();
-
-      $("#hex-values-box").children().remove();
-      outputHexList();
-      // console.log(hexList);
-      console.log(quantity);
+      generateItems();
 
       $("#item-count").val(quantity);
     }
-
   });
 
+  // Item Count Field
   $("#item-count").on('keyup', function() {
 
     if ( $(this).val() == '' ) {
@@ -129,12 +165,33 @@ $(document).ready(function() {
 
       $("#generated-swatches").children().remove();
       rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
-      generateItem();
-
-      $("#hex-values-box").children().remove();
-      outputHexList();
-      // console.log(quantity);
+      generateItems();
     }
+  });
+
+  // Sortable stuff
+  $("#starting-swatches").sortable();
+
+  $("#starting-swatches").on("sortstop", function() {
+    var getSpanText = $("#starting-swatches > div > span").text().split('#');
+
+    var newSwatchOrder = jQuery.makeArray( getSpanText );
+
+    newSwatchOrder = $.grep(newSwatchOrder, function(value) {
+      return value != "";
+    });
+
+    console.log("newSwatchOrder");
+    console.log(newSwatchOrder);
+
+    customSpectrum = newSwatchOrder.map(function(swatch){
+      return "#" + swatch
+    });
+
+    console.log("customSpectrum");
+    console.log(customSpectrum);
+
+    generateItems();
   });
 
 });
