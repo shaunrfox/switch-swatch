@@ -7,7 +7,8 @@ $(document).ready(function() {
   var rainbow = new Rainbow(); // by default, range is 0 to 100
 
   // Default starting swatches
-  customSpectrum = ['#f1da0e', '#c7da2e', '#72bf44', '#01a7a3', '#00a8d4', '#6575ae', '#5b2874', '#8e4879', '#d61f26'];
+  // customSpectrum = ['#f1da0e', '#c7da2e', '#72bf44', '#01a7a3', '#00a8d4', '#6575ae', '#5b2874', '#8e4879', '#d61f26'];
+  customSpectrum = ['#f1da0e', '#72bf44', '#00a8d4', '#5b2874', '#d61f26'];
 
   // Function to print out starting swatches
   function getSwatches() {
@@ -25,8 +26,8 @@ $(document).ready(function() {
 
   rainbow.setSpectrum.apply(null, customSpectrum);
 
-  $("#item-count").val("18");
-  quantity = 18;
+  $("#item-count").val("12");
+  quantity = 12;
   rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
   generateItems();
 
@@ -35,18 +36,18 @@ $(document).ready(function() {
 
     // Capture and store values from input
     newSwatches = $("#add-starting-hex").val();
-    // customSpectrum = $("#add-starting-hex").val()
-
-    // Push new values into array
-  	customSpectrum.push(newSwatches);
 
     // Clean array from extraneous characters
-  	// customSpectrum = customSpectrum.replace(/\s+/, "").replace(/[#"']/g,"").split(",")
-  	// customSpectrum = customSpectrum.map(function(swatch){
-  	// 	return "#" + swatch
-  	// });
+  	newSwatches = newSwatches.replace(/\s/g, "").replace(/[#"']/g,"").split(",")
 
-    console.log(customSpectrum);
+  	newSwatches.map(function(swatch){
+      if(swatch.length == 3){
+        swatch +=swatch
+      }
+      if(swatch.length == 6){
+        customSpectrum.push("#" + swatch)
+      }
+  	});
 
     // Send new values to rainbowvis
   	rainbow.setSpectrum.apply(null, customSpectrum);
@@ -84,6 +85,8 @@ $(document).ready(function() {
     getSwatches();
 
     generateItems();
+
+    onlyTwo();
   });
 
   // Increment Value
@@ -189,7 +192,7 @@ $(document).ready(function() {
   $("#starting-swatches").on("sortstop", function() {
     var getSpanText = $("#starting-swatches > div > span").text().split('#');
 
-    var newSwatchOrder = jQuery.makeArray( getSpanText );
+    var newSwatchOrder = $.makeArray( getSpanText );
 
     newSwatchOrder = $.grep(newSwatchOrder, function(value) {
       return value != "";
@@ -205,7 +208,14 @@ $(document).ready(function() {
     console.log("customSpectrum");
     console.log(customSpectrum);
 
+    getSwatches();
     generateItems();
   });
+
+  function onlyTwo() {
+    if ( $(".starting-swatch").length <= 2) {
+      $(".starting-swatch > svg").hide();
+    }
+  }
 
 });

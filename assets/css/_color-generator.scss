@@ -5,6 +5,15 @@ ul {
   width: 100%;
 }
 
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+  @include box-shadow(0 0 2px 2px rgba($off-black, .2));
+}
+
 .container {
   position: absolute;
   top: $header-height;
@@ -126,7 +135,7 @@ ul {
       height: 50px;
       bottom: 0;
       left: 0;
-      padding: 0 50px 0 10px;
+      padding: 5px 50px 0 10px;
       font-size: 25px;
       background: $white;
       border: 1px solid $mid-grey;
@@ -192,7 +201,7 @@ ul {
       height: 20px;
       background: rgba($off-black, .4);
       fill: $white;
-      // @include border-radius-all(20px);
+      @include border-radius(0, 4px, 0, 0);
       @include transition(top ease 200ms);
     }
 
