@@ -501,6 +501,13 @@ body, .container {
   body:after, .container:after {
     clear: both; }
 
+.main-header img, .main-header h1 {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
 /*
  * * * * * * * * * * * * * * * * * * *
  * MIXINS
@@ -911,13 +918,19 @@ ul {
   -moz-box-shadow: 0 2px 3px rgba(17, 17, 17, 0.2);
   -webkit-box-shadow: 0 2px 3px rgba(17, 17, 17, 0.2);
   z-index: 1000; }
+  .main-header img,
+  .main-header h1 {
+    float: left; }
+  .main-header img {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px; }
   .main-header h1 {
     font-size: 28px;
     font-size: 2.8rem;
     text-shadow: 1px 1px 2px rgba(17, 17, 17, 0.2);
     color: #fff;
-    margin: 0;
-    line-height: 74px; }
+    margin: 3px 0 0 0; }
 
 .section-header {
   position: relative;

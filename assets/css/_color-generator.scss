@@ -86,12 +86,23 @@ ul {
   @include box-shadow(0 2px 3px rgba($off-black, .2));
   z-index: 1000;
 
+  img,
+  h1 { float: left; }
+
+  img {
+    width: 45px;
+    height: 45px;
+    @extend %vertical-align;
+    margin-right: 10px;
+  }
+
   h1 {
     @include font-size(2.8);
     text-shadow: 1px 1px 2px rgba($off-black, .2);
     color: $white;
-    margin: 0;
-    line-height: $header-height + 4px;
+    margin: 3px 0 0 0;
+    // line-height: $header-height + 4px;
+    @extend %vertical-align;
   }
 }
 
