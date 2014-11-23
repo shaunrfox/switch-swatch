@@ -15,7 +15,7 @@ $(document).ready(function() {
     $("#starting-swatches").children().remove();
     for (var i = 0; i < customSpectrum.length; i++) {
       // console.log(customSpectrum[i]);
-      $("#starting-swatches").append('<div class="starting-swatch" style="background:' + customSpectrum[i] + ';"><span>' + customSpectrum[i] + '</span><svg viewBox="0 0 30 30" class="ico-close"><use xlink:href="#ico-close"></use></svg></div>')
+      $("#starting-swatches").append('<div class="starting-swatch" id="' + i + '" style="background:' + customSpectrum[i] + ';"><span>' + customSpectrum[i] + '</span><svg viewBox="0 0 30 30" class="ico-close"><use xlink:href="#ico-close"></use></svg></div>')
     }
 
     rainbow.setSpectrum.apply(null, customSpectrum);
@@ -71,21 +71,11 @@ $(document).ready(function() {
 
   // Remove swatch from array
   $("#starting-swatches").on("click", ".starting-swatch > svg", function() {
-    removeThisSwatch = $(this).siblings().text();
-    console.log(removeThisSwatch);
 
-    $(this).parent().remove();
-
-    console.log(customSpectrum);
-
-    customSpectrum = $.grep(customSpectrum, function(value) {
-      return value != removeThisSwatch;
-    });
+    customSpectrum.splice( $(this).parent().attr("id"), 1 );
 
     getSwatches();
-
     generateItems();
-
     onlyTwo();
   });
 
