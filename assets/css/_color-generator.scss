@@ -1,4 +1,4 @@
-$header-height: 70px;
+$header-height: 40px;
 
 ul {
   @extend %unstyled-list;
@@ -81,62 +81,64 @@ ul {
   position: relative;
   width: 100%;
   height: $header-height;
-  padding: 0 20px;
+  // padding: 0 20px;
   background: $blue;
+  background: darken($dark-grey, 20);
   @include box-shadow(0 2px 3px rgba($off-black, .2));
   z-index: 1000;
 
-  img,
+  .icon,
   h1 { float: left; }
 
-  img {
-    width: 45px;
-    height: 45px;
-    @extend %vertical-align;
+  .icon {
+    width: $header-height - 20px;
+    height: $header-height - 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: url('/assets/img/switch-swatch-icon.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     margin-right: 10px;
   }
 
   h1 {
-    @include font-size(2.8);
-    text-shadow: 1px 1px 2px rgba($off-black, .2);
-    color: $white;
-    margin: 3px 0 0 0;
-    // line-height: $header-height + 4px;
+    @include font-size(1.8);
+    text-transform: uppercase;
+    @extend %source-sans-semibold;
+    letter-spacing: 1px;
+    color: $dark-grey;
+    margin: 2px 0 0 0;
     @extend %vertical-align;
   }
 }
 
 .info-dropdown {
   position: relative;
-  top: 10px;
   float: right;
   width: auto;
   height: auto;
 
   .info-toggle {
     padding: 5px;
-    width: 50px;
-    height: 50px;
-    background: $blue;
+    width: $header-height;
+    height: $header-height;
+    background: darken($dark-grey, 10);
     border: none;
-    @include border-radius-all(40px);
 
-    svg { fill: darken($blue, 10); }
+    svg { fill: $off-black; }
 
     &:hover {
       cursor: pointer;
-      background: lighten($blue, 10);
-
-      // svg { fill: lighten($blue, 20); }
+      background: lighten($dark-grey, 10);
     }
 
     &:focus { outline: none; }
   }
 
   .info-content {
-    display: none;
     position: absolute;
-    top: 0;
+    top: -1000px;
     right: 0;
     padding: 30px 30px 10px 30px;
     min-width: 320px;
@@ -144,11 +146,12 @@ ul {
     background: $white;
     border: 1px solid $light-grey;
     @include box-shadow(2px 2px 3px rgba($off-black, .2));
+    @include transition(300ms ease all);
 
     .info-close {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 0;
+      right: 0;
       width: 40px;
       height: 40px;
       padding: 0;
@@ -224,7 +227,11 @@ ul {
 
   &.open {
     .info-toggle { background: none; }
-    .info-content { display: block; }
+    .info-content {
+      display: block;
+      top: 0;
+      @include transition(500ms ease all);
+    }
   }
 }
 
@@ -367,7 +374,6 @@ ul {
   bottom: 0;
   left: 300px;
   right: 0;
-  // padding: 50px 20px 20px;
   background: $white;
   overflow: auto;
 
@@ -397,29 +403,67 @@ ul {
     li {
       display: block;
       position: relative;
-      float: left;
-      width: 19%;
-      margin: 0 .5% 1% .5%;
-      height: 100px;
-      // border: 5px solid $white;
       text-align: center;
-      @include border-radius-all(4px);
-      @include box-shadow(1px 1px 2px rgba($off-black, .4));
-      overflow: hidden;
 
       span {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba($off-black, .4);
-        color: $white;
         @include font-size(1.2);
         padding: 8px 0 5px;
         display: block;
         text-align: center;
         width: 100%;
-        @include border-radius(0, 0, 4px, 4px);
+      }
+    }
+
+    &.grid-view {
+      li {
+        float: left;
+        width: 19%;
+        margin: 0 .5% 1% .5%;
+        height: 100px;
+        @include border-radius-all(4px);
+        @include box-shadow(1px 1px 2px rgba($off-black, .4));
+        overflow: hidden;
+
+        span {
+          background: rgba($off-black, .4);
+          color: $white;
+          @include border-radius(0, 0, 4px, 4px);
+        }
+      }
+    }
+
+    &.bar-chart-view {
+      top: 100px;
+      bottom: auto;
+      height: 400px;
+      overflow-y: visible;
+      overflow-x: auto;
+      white-space: nowrap;
+      background: $orange;
+
+      li {
+        bottom: -100px;
+        display: inline-block;
+        width: 70px;
+        height: 150px;
+        margin: 0;
+        border-right: 20px solid $white;
+        // border-left: 20px solid $white;
+
+        span {
+          bottom: -50px;
+          border-right: 1px solid $mid-grey;
+          color: $off-black;
+          -webkit-transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+          -o-transform: rotate(-90deg);
+          filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        }
       }
     }
   }

@@ -501,7 +501,7 @@ body, .container, .info-dropdown .info-content ol {
   body:after, .container:after, .info-dropdown .info-content ol:after {
     clear: both; }
 
-.main-header img, .main-header h1 {
+.main-header h1 {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -583,7 +583,7 @@ html {
   font-family: 'SourceSansProRegular', Verdana, Helvetica, Arial, sans-serif;
   font-weight: 400; }
 
-.button, .button-red, .button-green, .button-light, .button-dark, p strong, .item-controls #item-count, .info-dropdown .info-content h5, .info-dropdown .info-content footer a, .section-header, .hex-values-box:before {
+.button, .button-red, .button-green, .button-light, .button-dark, p strong, .item-controls #item-count, .main-header h1, .info-dropdown .info-content h5, .info-dropdown .info-content footer a, .section-header, .hex-values-box:before {
   font-family: 'SourceSansProSemibold', Verdana, Helvetica, Arial, sans-serif;
   font-weight: 600; }
 
@@ -853,7 +853,7 @@ ul {
 
 .container {
   position: absolute;
-  top: 70px;
+  top: 40px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -913,53 +913,55 @@ ul {
 .main-header {
   position: relative;
   width: 100%;
-  height: 70px;
-  padding: 0 20px;
+  height: 40px;
   background: #0090cb;
+  background: #333333;
   box-shadow: 0 2px 3px rgba(17, 17, 17, 0.2);
   -moz-box-shadow: 0 2px 3px rgba(17, 17, 17, 0.2);
   -webkit-box-shadow: 0 2px 3px rgba(17, 17, 17, 0.2);
   z-index: 1000; }
-  .main-header img,
+  .main-header .icon,
   .main-header h1 {
     float: left; }
-  .main-header img {
-    width: 45px;
-    height: 45px;
+  .main-header .icon {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: url("/assets/img/switch-swatch-icon.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     margin-right: 10px; }
   .main-header h1 {
-    font-size: 28px;
-    font-size: 2.8rem;
-    text-shadow: 1px 1px 2px rgba(17, 17, 17, 0.2);
-    color: #fff;
-    margin: 3px 0 0 0; }
+    font-size: 18px;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    margin: 2px 0 0 0; }
 
 .info-dropdown {
   position: relative;
-  top: 10px;
   float: right;
   width: auto;
   height: auto; }
   .info-dropdown .info-toggle {
     padding: 5px;
-    width: 50px;
-    height: 50px;
-    background: #0090cb;
-    border: none;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px; }
+    width: 40px;
+    height: 40px;
+    background: #4d4d4d;
+    border: none; }
     .info-dropdown .info-toggle svg {
-      fill: #006c98; }
+      fill: #111; }
     .info-dropdown .info-toggle:hover {
       cursor: pointer;
-      background: #00b4fe; }
+      background: gray; }
     .info-dropdown .info-toggle:focus {
       outline: none; }
   .info-dropdown .info-content {
-    display: none;
     position: absolute;
-    top: 0;
+    top: -1000px;
     right: 0;
     padding: 30px 30px 10px 30px;
     min-width: 320px;
@@ -968,11 +970,15 @@ ul {
     border: 1px solid #ccc;
     box-shadow: 2px 2px 3px rgba(17, 17, 17, 0.2);
     -moz-box-shadow: 2px 2px 3px rgba(17, 17, 17, 0.2);
-    -webkit-box-shadow: 2px 2px 3px rgba(17, 17, 17, 0.2); }
+    -webkit-box-shadow: 2px 2px 3px rgba(17, 17, 17, 0.2);
+    -webkit-transition: 300ms ease all;
+    -moz-transition: 300ms ease all;
+    -o-transition: 300ms ease all;
+    transition: 300ms ease all; }
     .info-dropdown .info-content .info-close {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 0;
+      right: 0;
       width: 40px;
       height: 40px;
       padding: 0;
@@ -1031,7 +1037,12 @@ ul {
   .info-dropdown.open .info-toggle {
     background: none; }
   .info-dropdown.open .info-content {
-    display: block; }
+    display: block;
+    top: 0;
+    -webkit-transition: 500ms ease all;
+    -moz-transition: 500ms ease all;
+    -o-transition: 500ms ease all;
+    transition: 500ms ease all; }
 
 .section-header {
   position: relative;
@@ -1048,7 +1059,7 @@ ul {
 
 .input-colors {
   position: absolute;
-  top: 70px;
+  top: 40px;
   width: 300px;
   bottom: 0;
   left: 0;
@@ -1170,7 +1181,7 @@ ul {
 .color-swatches {
   display: block;
   position: absolute;
-  top: 70px;
+  top: 40px;
   bottom: 0;
   left: 300px;
   right: 0;
@@ -1196,11 +1207,23 @@ ul {
     .color-swatches > ul li {
       display: block;
       position: relative;
+      text-align: center; }
+      .color-swatches > ul li span {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        font-size: 12px;
+        font-size: 1.2rem;
+        padding: 8px 0 5px;
+        display: block;
+        text-align: center;
+        width: 100%; }
+    .color-swatches > ul.grid-view li {
       float: left;
       width: 19%;
       margin: 0 .5% 1% .5%;
       height: 100px;
-      text-align: center;
       -webkit-border-radius: 4px;
       -moz-border-radius: 4px;
       border-radius: 4px;
@@ -1208,22 +1231,36 @@ ul {
       -moz-box-shadow: 1px 1px 2px rgba(17, 17, 17, 0.4);
       -webkit-box-shadow: 1px 1px 2px rgba(17, 17, 17, 0.4);
       overflow: hidden; }
-      .color-swatches > ul li span {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
+      .color-swatches > ul.grid-view li span {
         background: rgba(17, 17, 17, 0.4);
         color: #fff;
-        font-size: 12px;
-        font-size: 1.2rem;
-        padding: 8px 0 5px;
-        display: block;
-        text-align: center;
-        width: 100%;
         -webkit-border-radius: 0 0 4px 4px;
         -moz-border-radius: 0 0 4px 4px;
         border-radius: 0 0 4px 4px; }
+    .color-swatches > ul.bar-chart-view {
+      top: 100px;
+      bottom: auto;
+      height: 400px;
+      overflow-y: visible;
+      overflow-x: auto;
+      white-space: nowrap;
+      background: #ff6600; }
+      .color-swatches > ul.bar-chart-view li {
+        bottom: -100px;
+        display: inline-block;
+        width: 70px;
+        height: 150px;
+        margin: 0;
+        border-right: 20px solid #fff; }
+        .color-swatches > ul.bar-chart-view li span {
+          bottom: -50px;
+          border-right: 1px solid #aaa;
+          color: #111;
+          -webkit-transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+          -o-transform: rotate(-90deg);
+          filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); }
 
 .hex-values-box {
   display: block;
