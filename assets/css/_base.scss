@@ -56,12 +56,13 @@ p {
   	color: $orange;
   	@extend %source-sans-semibold;
   }
+}
 
-	a {
-		color: $blue;
+a {
+  color: $blue;
+  text-decoration: none;
 
-		&:hover {
-			border-bottom: 2px solid $blue;
-		}
-	}
+  &:hover {
+    border-bottom: 1px solid $blue;
+  }
 }

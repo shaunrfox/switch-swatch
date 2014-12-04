@@ -493,12 +493,12 @@ table {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-body, .container {
+body, .container, .info-dropdown .info-content ol {
   zoom: 1; }
-  body:after, .container:after, body:before, .container:before {
+  body:after, .container:after, .info-dropdown .info-content ol:after, body:before, .container:before, .info-dropdown .info-content ol:before {
     content: "";
     display: table; }
-  body:after, .container:after {
+  body:after, .container:after, .info-dropdown .info-content ol:after {
     clear: both; }
 
 .main-header img, .main-header h1 {
@@ -583,7 +583,7 @@ html {
   font-family: 'SourceSansProRegular', Verdana, Helvetica, Arial, sans-serif;
   font-weight: 400; }
 
-.button, .button-red, .button-green, .button-light, .button-dark, p strong, .item-controls #item-count, .section-header, .hex-values-box:before {
+.button, .button-red, .button-green, .button-light, .button-dark, p strong, .item-controls #item-count, .info-dropdown .info-content h5, .info-dropdown .info-content footer a, .section-header, .hex-values-box:before {
   font-family: 'SourceSansProSemibold', Verdana, Helvetica, Arial, sans-serif;
   font-weight: 600; }
 
@@ -831,10 +831,12 @@ p {
     text-transform: uppercase;
     font-size: .9em;
     color: #ff6600; }
-  p a {
-    color: #0090cb; }
-    p a:hover {
-      border-bottom: 2px solid #0090cb; }
+
+a {
+  color: #0090cb;
+  text-decoration: none; }
+  a:hover {
+    border-bottom: 1px solid #0090cb; }
 
 ul {
   width: 100%; }
@@ -931,6 +933,105 @@ ul {
     text-shadow: 1px 1px 2px rgba(17, 17, 17, 0.2);
     color: #fff;
     margin: 3px 0 0 0; }
+
+.info-dropdown {
+  position: relative;
+  top: 10px;
+  float: right;
+  width: auto;
+  height: auto; }
+  .info-dropdown .info-toggle {
+    padding: 5px;
+    width: 50px;
+    height: 50px;
+    background: #0090cb;
+    border: none;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px; }
+    .info-dropdown .info-toggle svg {
+      fill: #006c98; }
+    .info-dropdown .info-toggle:hover {
+      cursor: pointer;
+      background: #00b4fe; }
+    .info-dropdown .info-toggle:focus {
+      outline: none; }
+  .info-dropdown .info-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 30px 30px 10px 30px;
+    min-width: 320px;
+    min-height: 100px;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 3px rgba(17, 17, 17, 0.2);
+    -moz-box-shadow: 2px 2px 3px rgba(17, 17, 17, 0.2);
+    -webkit-box-shadow: 2px 2px 3px rgba(17, 17, 17, 0.2); }
+    .info-dropdown .info-content .info-close {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      background: none;
+      border: none; }
+      .info-dropdown .info-content .info-close svg {
+        fill: #ccc; }
+      .info-dropdown .info-content .info-close:focus {
+        outline: none; }
+      .info-dropdown .info-content .info-close:hover {
+        cursor: pointer; }
+        .info-dropdown .info-content .info-close:hover svg {
+          fill: #666; }
+    .info-dropdown .info-content p {
+      margin: 0 0 10px 0; }
+    .info-dropdown .info-content hr {
+      border: none;
+      border-top: 1px solid #ccc; }
+    .info-dropdown .info-content h5 {
+      text-transform: uppercase;
+      color: #ccc;
+      font-size: 14px;
+      font-size: 1.4rem;
+      margin-bottom: 10px; }
+    .info-dropdown .info-content ol {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-bottom: none;
+      -moz-list-style: none none none;
+      -moz-margin-before: 0;
+      -moz-margin-after: 0;
+      -moz-margin-start: 0;
+      -moz-margin-end: 0;
+      -moz-padding-start: 0;
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      -webkit-margin-start: 0;
+      -webkit-margin-end: 0;
+      -webkit-padding-start: 0;
+      padding-left: 20px;
+      margin-bottom: 30px;
+      color: #666; }
+      .info-dropdown .info-content ol li {
+        margin-bottom: 10px;
+        line-height: 1.3em; }
+    .info-dropdown .info-content footer {
+      text-align: center;
+      width: 100%;
+      height: 30px;
+      line-height: 30px; }
+      .info-dropdown .info-content footer a {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-size: 1.4rem; }
+  .info-dropdown.open .info-toggle {
+    background: none; }
+  .info-dropdown.open .info-content {
+    display: block; }
 
 .section-header {
   position: relative;

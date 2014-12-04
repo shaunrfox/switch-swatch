@@ -106,6 +106,128 @@ ul {
   }
 }
 
+.info-dropdown {
+  position: relative;
+  top: 10px;
+  float: right;
+  width: auto;
+  height: auto;
+
+  .info-toggle {
+    padding: 5px;
+    width: 50px;
+    height: 50px;
+    background: $blue;
+    border: none;
+    @include border-radius-all(40px);
+
+    svg { fill: darken($blue, 10); }
+
+    &:hover {
+      cursor: pointer;
+      background: lighten($blue, 10);
+
+      // svg { fill: lighten($blue, 20); }
+    }
+
+    &:focus { outline: none; }
+  }
+
+  .info-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 30px 30px 10px 30px;
+    min-width: 320px;
+    min-height: 100px;
+    background: $white;
+    border: 1px solid $light-grey;
+    @include box-shadow(2px 2px 3px rgba($off-black, .2));
+
+    .info-close {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      background: none;
+      border: none;
+
+      svg { fill: $light-grey; }
+
+      &:focus { outline: none; }
+
+      &:hover {
+        cursor: pointer;
+
+        svg { fill: $dark-grey; }
+      }
+    }
+
+    p { margin: 0 0 10px 0; }
+
+    hr {
+      border: none;
+      border-top: 1px solid $light-grey;
+    }
+
+    h5 {
+      text-transform: uppercase;
+      color: $light-grey;
+      @include font-size(1.4);
+      @extend %source-sans-semibold;
+      margin-bottom: 10px;
+    }
+
+    ol {
+      display: block;
+      width: 100%;
+      height: auto;
+      @extend %clearfix;
+      border-bottom: none;
+      -moz-list-style: none none none;
+      -moz-margin-before: 0;
+      -moz-margin-after: 0;
+      -moz-margin-start: 0;
+      -moz-margin-end: 0;
+      -moz-padding-start: 0;
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      -webkit-margin-start: 0;
+      -webkit-margin-end: 0;
+      -webkit-padding-start: 0;
+      padding-left: 20px;
+      margin-bottom: 30px;
+      color: $dark-grey;
+
+      li {
+        margin-bottom: 10px;
+        line-height: 1.3em;
+      }
+    }
+
+    footer {
+      text-align: center;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+
+      a {
+        text-transform: uppercase;
+        @include font-size(1.4);
+        @extend %source-sans-semibold;
+      }
+    }
+  }
+
+  &.open {
+    .info-toggle { background: none; }
+    .info-content { display: block; }
+  }
+}
+
 .section-header {
   position: relative;
   width: 100%;

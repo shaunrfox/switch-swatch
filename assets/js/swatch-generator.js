@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+  $(".info-dropdown").on("click", ".info-toggle", function() {
+    $(".info-dropdown").addClass("open");
+  });
+
+  $(".info-content").on("click", ".info-close", function() {
+    $(".info-dropdown").removeClass("open");
+  });
+
   // Count
   var quantity = 0;
 
