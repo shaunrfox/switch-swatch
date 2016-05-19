@@ -49,6 +49,8 @@ $(document).ready(function() {
 
     $("#generated-swatches").children().remove();
 
+    hexList = [];
+
     for (var i = 0; i < quantity; i++) {
       var hex = '#' + rainbow.colourAt(i);
       hexList.push(hex);
