@@ -4,6 +4,7 @@ $(document).ready(function() {
   var rainbow = new Rainbow(); // by default, range is 0 to 100
   customSpectrum = [];
   hexList = [];
+  var randomize = false;
 
   // Function to print out starting swatches
   function getStartingSwatches() {
@@ -62,6 +63,12 @@ $(document).ready(function() {
     outputHexList();
   }
 
+  function randomizeGeneratedSwatches() {
+    if ( randomize === true ) {
+
+    }
+  }
+
   function outputHexList() {
     $("#hex-values-box").children().remove();
 
@@ -85,6 +92,12 @@ $(document).ready(function() {
     $("#item-count").val("12");
     quantity = 12;
     rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
+  }
+
+  function resetStartingSwatches() {
+    customSpectrum = ['#f1da0e', '#72bf44', '#00a8d4', '#5b2874', '#d61f26'];
+    getStartingSwatches();
+    generateNewSwatches();
   }
 
   function incrementValue() { quantity += 1; };
@@ -157,6 +170,10 @@ $(document).ready(function() {
       $("button.add-starting-hex").click();
       getStartingSwatches();
     }
+  });
+
+  $("#resetSwatches").on("click", function(){
+    resetStartingSwatches();
   });
 
   // About dialog clicks
