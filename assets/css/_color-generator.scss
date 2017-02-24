@@ -245,9 +245,14 @@ ul {
   @extend %source-sans-semibold;
   color: $dark-grey;
   border-bottom: 1px solid $mid-grey;
-  margin-bottom: 20px;
-  padding: 0 20px;
+  margin-bottom: 0;
+  padding: 0 10px 0 20px;
   z-index: 50;
+}
+
+.reset-swatches {
+  float: right;
+  margin-top: 10px;
 }
 
 .input-colors {
@@ -264,22 +269,31 @@ ul {
 
   .input-form {
     position: relative;
-    width: 260px;
-    margin-left: 20px;
+    width: 300px;
+    // margin-left: 10px;
     height: 50px;
 
     input[type="text"] {
       position: absolute;
       top: 0;
-      width: 260px;
+      width: 300px;
       height: 50px;
       bottom: 0;
       left: 0;
       padding: 5px 50px 0 10px;
       font-size: 25px;
       background: $white;
-      border: 1px solid $mid-grey;
-      @include border-radius-all(4px);
+      border: none;
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+      border-bottom: 1px solid $mid-grey;
+      border-right: 1px solid $mid-grey;
+      // @include border-radius-all(4px);
+
+      &:focus {
+        outline: none;
+        border-color: $blue;
+      }
     }
 
     .button {
@@ -292,20 +306,20 @@ ul {
 
 #starting-swatches {
   position: absolute;
-  top: 140px;
-  right: 20px;
-  bottom: 20px;
-  left: 20px;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 0;
   padding: 10px;
-  background: $white;
+  background: $off-white;
   overflow: auto;
 
   .starting-swatch,
   .sortable-placeholder {
     position: relative;
-    width: 69px;
-    height: 89px;
-    margin: 5px;
+    width: 29%;
+    height: 103px;
+    margin: 2%;
     float: left;
     padding: 10px;
     @include border-radius-all(4px);

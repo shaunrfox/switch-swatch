@@ -702,11 +702,11 @@ html {
   background: #aaa;
   color: #111; }
   .button:hover {
-    background: #c3c3c3; }
+    background: #c4c4c4; }
   .button:active {
-    background: #909090; }
+    background: #919191; }
   .button:disabled:hover, .button:disabled:active, .button[disabled=disabled]:hover, .button[disabled=disabled]:active {
-    background: #c3c3c3; }
+    background: #c4c4c4; }
 
 .button-red {
   background: #ed1c24;
@@ -736,7 +736,7 @@ html {
   .button-light:hover {
     background: white; }
   .button-light:active {
-    background: #d4d4d4; }
+    background: #d5d5d5; }
   .button-light:disabled:hover, .button-light:disabled:active, .button-light[disabled=disabled]:hover, .button-light[disabled=disabled]:active {
     background: white; }
 
@@ -750,6 +750,16 @@ html {
     background: #333333; }
   .button-dark:disabled:hover, .button-dark:disabled:active, .button-dark[disabled=disabled]:hover, .button-dark[disabled=disabled]:active {
     background: #666666; }
+
+.icon-button {
+  background: none;
+  border: none;
+  opacity: .7; }
+  .icon-button:hover {
+    background: none;
+    opacity: 1; }
+  .icon-button:active {
+    border: none; }
 
 /*
  * * * * * * * * * * * * * * * * * * *
@@ -1049,9 +1059,13 @@ ul {
   text-transform: uppercase;
   color: #666;
   border-bottom: 1px solid #aaa;
-  margin-bottom: 20px;
-  padding: 0 20px;
+  margin-bottom: 0;
+  padding: 0 10px 0 20px;
   z-index: 50; }
+
+.reset-swatches {
+  float: right;
+  margin-top: 10px; }
 
 .input-colors {
   position: absolute;
@@ -1068,23 +1082,26 @@ ul {
   z-index: 100; }
   .input-colors .input-form {
     position: relative;
-    width: 260px;
-    margin-left: 20px;
+    width: 300px;
     height: 50px; }
     .input-colors .input-form input[type="text"] {
       position: absolute;
       top: 0;
-      width: 260px;
+      width: 300px;
       height: 50px;
       bottom: 0;
       left: 0;
       padding: 5px 50px 0 10px;
       font-size: 25px;
       background: #fff;
-      border: 1px solid #aaa;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      border-radius: 4px; }
+      border: none;
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+      border-bottom: 1px solid #aaa;
+      border-right: 1px solid #aaa; }
+      .input-colors .input-form input[type="text"]:focus {
+        outline: none;
+        border-color: #0090cb; }
     .input-colors .input-form .button {
       position: absolute;
       top: 10px;
@@ -1092,19 +1109,19 @@ ul {
 
 #starting-swatches {
   position: absolute;
-  top: 140px;
-  right: 20px;
-  bottom: 20px;
-  left: 20px;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 0;
   padding: 10px;
-  background: #fff;
+  background: #eee;
   overflow: auto; }
   #starting-swatches .starting-swatch,
   #starting-swatches .sortable-placeholder {
     position: relative;
-    width: 69px;
-    height: 89px;
-    margin: 5px;
+    width: 29%;
+    height: 103px;
+    margin: 2%;
     float: left;
     padding: 10px;
     -webkit-border-radius: 4px;
