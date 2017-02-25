@@ -54,6 +54,16 @@
 	font-size: $size + rem;
 }
 
+// Slightly lighten a color
+@function tint($color, $percentage) {
+  @return mix($color, white, $percentage);
+}
+
+// Slightly darken a color
+@function shade($color, $percentage) {
+  @return mix($color, black, $percentage);
+}
+
 @mixin box-shadow ($shadows...) {
 	box-shadow: $shadows;
 	-moz-box-shadow: $shadows;

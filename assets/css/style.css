@@ -668,6 +668,47 @@ html {
   background: #aaa;
   margin: 10px 0 30px; }
 
+.checkbox-input {
+  display: none; }
+  .checkbox-input + label {
+    position: relative;
+    font-size: 16px;
+    font-size: 1.6rem;
+    line-height: 30px;
+    cursor: pointer; }
+    .checkbox-input + label:before {
+      content: '';
+      display: inline-block;
+      height: 16px;
+      width: 16px;
+      background: #e6e6e6;
+      position: relative;
+      top: 2px;
+      margin: 0 6px 0 0; }
+    .checkbox-input + label:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -9px;
+      left: 7px;
+      width: 10px;
+      height: 19px;
+      border: solid #0090cb;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+      opacity: 0; }
+    .checkbox-input + label:hover:after {
+      opacity: 0.25; }
+  .checkbox-input:checked + label::after, .checkbox-input.checked + label::after {
+    opacity: 1; }
+  .checkbox-input:disabled + label {
+    opacity: 0.5;
+    cursor: default; }
+    .checkbox-input:disabled + label:hover:after {
+      opacity: 0; }
+  .checkbox-input:disabled:checked + label:hover::after, .checkbox-input:disabled.checked + label::after {
+    opacity: 1; }
+
 /*
  * * * * * * * * * * * * * * * * * * *
  * BUTTON STYLES
@@ -1190,6 +1231,11 @@ ul {
     box-shadow: none;
     -moz-box-shadow: none;
     -webkit-box-shadow: none; }
+
+.randomize {
+  float: left; }
+  .randomize input {
+    margin-right: 5px; }
 
 .color-swatches {
   display: block;

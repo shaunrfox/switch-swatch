@@ -45,6 +45,11 @@ $(document).ready(function() {
     generateNewSwatches();
   }
 
+  function shuffle(o) {
+    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+  };
+
   function generateNewSwatches() {
     var newSwatchTemplate = ''
 
@@ -55,18 +60,22 @@ $(document).ready(function() {
     for (var i = 0; i < quantity; i++) {
       var hex = '#' + rainbow.colourAt(i);
       hexList.push(hex);
-      newSwatchTemplate += '<li style="background-color:' + hex + '"><span>' + hex + '</span></li>';
+    }
+
+    if ( $("#randomize input[type=checkbox]").is(':checked') ) {
+      shuffle(hexList);
+      for (var i = 0; i < quantity; i++) {
+        newSwatchTemplate += '<li style="background-color:' + hexList[i] + '"><span>' + hexList[i] + '</span></li>';
+      }
+    } else {
+      for (var i = 0; i < quantity; i++) {
+        newSwatchTemplate += '<li style="background-color:' + hexList[i] + '"><span>' + hexList[i] + '</span></li>';
+      }
     }
 
     $("#generated-swatches").append(newSwatchTemplate);
 
     outputHexList();
-  }
-
-  function randomizeGeneratedSwatches() {
-    if ( randomize === true ) {
-
-    }
   }
 
   function outputHexList() {
@@ -172,8 +181,14 @@ $(document).ready(function() {
     }
   });
 
+  // Reset starting swatches
   $("#resetSwatches").on("click", function(){
     resetStartingSwatches();
+  });
+
+  // Randomize Click
+  $('#randomize-check').change(function() {
+    generateNewSwatches();
   });
 
   // About dialog clicks

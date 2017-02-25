@@ -16,3 +16,62 @@
 	background: $mid-grey;
 	margin: 10px 0 30px;
 }
+
+.checkbox-input {
+	display: none;
+	& + label {
+		position: relative;
+		@include font-size(1.6);
+		line-height: 30px;
+		cursor: pointer;
+
+		&:before {
+			content: '';
+			display: inline-block;
+			height: 16px;
+			width: 16px;
+			background: tint($light-grey, 50);
+			position: relative;
+			top: 2px;
+			margin: 0 6px 0 0;
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			top: -9px;
+			left: 7px;
+			width: 10px;
+			height: 19px;
+			border: solid $blue;
+			border-width: 0 3px 3px 0;
+			transform: rotate(45deg);
+			opacity: 0;
+		}
+
+		&:hover:after {
+			opacity: 0.25;
+		}
+	}
+
+	&:checked + label::after, &.checked + label::after {
+		opacity: 1;
+	}
+
+	&:disabled {
+		& + label {
+			opacity: 0.5;
+			cursor: default;
+
+			&:hover {
+				&:after {
+					opacity: 0;
+				}
+			}
+		}
+		&:checked + label:hover::after, &.checked + label::after {
+			opacity: 1;
+		}
+	}
+}

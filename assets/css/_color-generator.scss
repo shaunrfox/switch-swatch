@@ -380,6 +380,12 @@ ul {
   }
 }
 
+.randomize {
+  float: left;
+
+  input { margin-right: 5px; }
+}
+
 .color-swatches {
   display: block;
   position: absolute;
