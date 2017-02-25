@@ -32,6 +32,9 @@ $(document).ready(function() {
       }
     });
 
+    // Show reset button
+    $(".reset-swatches").show();
+
     // Send new values to rainbowvis
     rainbow.setSpectrum.apply(null, customSpectrum);
 
@@ -91,6 +94,7 @@ $(document).ready(function() {
 
   function removeThisSwatch(element) {
     customSpectrum.splice( $(element).parent().attr("id"), 1 );
+    $(".reset-swatches").show();
     getStartingSwatches();
     generateNewSwatches();
     onlyTwo();
@@ -105,6 +109,7 @@ $(document).ready(function() {
 
   function resetStartingSwatches() {
     customSpectrum = ['#f1da0e', '#72bf44', '#00a8d4', '#5b2874', '#d61f26'];
+    $(".reset-swatches").hide();
     getStartingSwatches();
     generateNewSwatches();
   }
@@ -217,6 +222,9 @@ $(document).ready(function() {
 
   // Item Count Field
   $("#item-count").on('keyup', function() {
+    if(code == 37 || code == 38 || code == 39 || code == 40) {
+        return;
+    }
     generatedSwatchesFieldKeyup( $(this) );
   });
 
@@ -237,6 +245,8 @@ $(document).ready(function() {
     customSpectrum = newSwatchOrder.map(function(swatch){
       return "#" + swatch
     });
+
+    $(".reset-swatches").show();
 
     getStartingSwatches();
     generateNewSwatches();
