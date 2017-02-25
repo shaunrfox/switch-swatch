@@ -222,9 +222,6 @@ $(document).ready(function() {
 
   // Item Count Field
   $("#item-count").on('keyup', function() {
-    if(code == 37 || code == 38 || code == 39 || code == 40) {
-        return;
-    }
     generatedSwatchesFieldKeyup( $(this) );
   });
 
