@@ -243,8 +243,9 @@ ul {
   text-align: left;
   text-transform: uppercase;
   @extend %source-sans-semibold;
+  background-color: $off-white;
   color: $dark-grey;
-  border-bottom: 1px solid $mid-grey;
+  // border-bottom: 1px solid $mid-grey;
   margin-bottom: 0;
   padding: 0 10px 0 20px;
   z-index: 50;
@@ -261,7 +262,7 @@ ul {
   width: 300px;
   bottom: 0;
   left: 0;
-  background: $light-grey;
+  background: $off-white;
   padding: 0;
   border-right: 1px solid $mid-grey;
   @include box-shadow(2px 0 3px rgba($off-black, .2));
@@ -269,26 +270,27 @@ ul {
 
   .input-form {
     position: relative;
-    width: 300px;
-    // margin-left: 10px;
+    width: 280px;
+    margin-left: 10px;
     height: 50px;
 
     input[type="text"] {
       position: absolute;
       top: 0;
-      width: 300px;
+      width: 280px;
       height: 50px;
       bottom: 0;
       left: 0;
       padding: 5px 50px 0 10px;
-      font-size: 25px;
+      font-size: 22px;
       background: $white;
       border: none;
-      border-top: 1px solid transparent;
-      border-left: 1px solid transparent;
-      border-bottom: 1px solid $mid-grey;
-      border-right: 1px solid $mid-grey;
-      // @include border-radius-all(4px);
+      // border-top: 1px solid transparent;
+      // border-left: 1px solid transparent;
+      // border-bottom: 1px solid $mid-grey;
+      // border-right: 1px solid $mid-grey;
+      border: 1px solid $mid-grey;
+      @include border-radius-all(4px);
 
       &:focus {
         outline: none;
@@ -398,7 +400,7 @@ ul {
 
   .section-header {
     padding: 0 20px;
-    background: darken($off-white, 5);
+    background: $off-white;
     background: $white;
     color: $mid-grey;
     border-bottom: 1px solid $light-grey;
