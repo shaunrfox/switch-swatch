@@ -64,6 +64,8 @@
     "@storybook/addons": "^5.3.18",
     "@storybook/preset-create-react-app": "^2.1.1",
     "@storybook/react": "^5.3.18",
+    "@styled-system/css": "^5.1.5",
+    "@types/styled-system__css": "^5.0.8",
     "emotion-theming": "^10.0.27",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.3",
