@@ -11,7 +11,7 @@ export default {
 };
 
 export const knobs = () => (
-    <Text as="div" level={select('Level', [1, 2, 3, 4, 5], 3)}>
+    <Text level={select('Level', [1, 2, 3, 4, 5], 3)}>
         {text(
             'Children',
             'Spicy jalapeno bacon ipsum dolor amet ham hock short loin spare ribs pork loin. Biltong short loin beef, cow chicken buffalo frankfurter pork loin. Chicken capicola burgdoggen shankle kevin spare ribs shoulder jerky pork belly. Kevin pork filet mignon, meatloaf pastrami ground round shankle ball tip sirloin. Short ribs ground round bacon tri-tip meatball.',

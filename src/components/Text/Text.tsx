@@ -8,7 +8,7 @@ interface TextProps extends StyleProps {
     level: 1 | 2 | 3 | 4 | 5;
 }
 
-const Text = styled.h2<TextProps>(
+const Text = styled.p<TextProps>(
     ({ level, ...props }) =>
         themeHelper({
             fontSize: level,
