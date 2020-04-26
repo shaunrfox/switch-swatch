@@ -1,17 +1,14 @@
 import React from 'react';
-import { Global, css } from '@emotion/core';
+
+import 'normalize.css/normalize.css';
+
+import Heading from '../Heading/Heading';
 
 function App() {
     return (
-        <div>
-            <Global
-                styles={css`
-                    body {
-                        margin: 0;
-                    }
-                `}
-            />
-        </div>
+        <>
+            <Heading level={2}>Hello, World</Heading>
+        </>
     );
 }
 
