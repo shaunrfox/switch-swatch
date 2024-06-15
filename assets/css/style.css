@@ -488,7 +488,7 @@ table {
  * EXTENDS
  * * * * * * * * * * * * * * * * * * *
  */
-*, *:before, *:after {
+*, :before, :after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
@@ -603,10 +603,10 @@ html {
   width: 50%; }
 
 .one-third-width {
-  width: 33.33333%; }
+  width: 33.3333333333%; }
 
 .two-thirds-width {
-  width: 66.66667%; }
+  width: 66.6666666667%; }
 
 .one-fourth-width {
   width: 25%; }
@@ -627,10 +627,10 @@ html {
   width: 80%; }
 
 .one-sixth-width {
-  width: 16.66667%; }
+  width: 16.6666666667%; }
 
 .five-sixths-width {
-  width: 83.33333%; }
+  width: 83.3333333333%; }
 
 .full-height {
   height: 100%; }
@@ -949,7 +949,9 @@ ul {
     line-height: 31px;
     font-size: 18px; }
 
-.button {
+.icon-button,
+.info-toggle,
+.info-close {
   width: 30px;
   height: 30px;
   padding: 0;
@@ -957,7 +959,9 @@ ul {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none; }
-  .button svg {
+  .icon-button svg,
+  .info-toggle svg,
+  .info-close svg {
     width: 30px;
     height: 30px; }
 
@@ -1093,9 +1097,12 @@ ul {
 
 .section-header {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 50px;
-  line-height: 52px;
+  line-height: 1em;
   text-align: left;
   text-transform: uppercase;
   background-color: #eee;
@@ -1103,6 +1110,10 @@ ul {
   margin-bottom: 0;
   padding: 0 10px 0 20px;
   z-index: 50; }
+
+.section-header-left {
+  display: flex;
+  align-items: center; }
 
 .reset-swatches {
   float: right;
@@ -1253,8 +1264,6 @@ ul {
     background: #fff;
     color: #aaa;
     border-bottom: 1px solid #ccc; }
-    .color-swatches .section-header span {
-      float: left; }
   .color-swatches > ul {
     display: block;
     position: absolute;
@@ -1321,6 +1330,9 @@ ul {
           -ms-transform: rotate(-90deg);
           -o-transform: rotate(-90deg);
           filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); }
+
+.svg-swatches-wrapper {
+  display: none; }
 
 .hex-values-box {
   display: block;

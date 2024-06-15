@@ -1,10 +1,11 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
   var quantity = 0;
   var rainbow = new Rainbow(); // by default, range is 0 to 100
   customSpectrum = [];
   hexList = [];
   var randomize = false;
+  const svgSwatchContainer = document.querySelector("#svg-swatches-wrapper");
 
   // Function to print out starting swatches
   function getStartingSwatches() {
@@ -21,13 +22,13 @@ $(document).ready(function() {
     newSwatches = $("#add-starting-hex").val();
 
     // Clean array from extraneous characters
-    newSwatches = newSwatches.replace(/\s/g, "").replace(/[#"']/g,"").split(",")
+    newSwatches = newSwatches.replace(/\s/g, "").replace(/[#"']/g, "").split(",")
 
-    newSwatches.map(function(swatch){
-      if(swatch.length == 3){
+    newSwatches.map(function (swatch) {
+      if (swatch.length == 3) {
         swatch += swatch
       }
-      if(swatch.length == 6){
+      if (swatch.length == 6) {
         customSpectrum.push("#" + swatch)
       }
     });
@@ -49,7 +50,7 @@ $(document).ready(function() {
   }
 
   function shuffle(o) {
-    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
   };
 
@@ -65,7 +66,7 @@ $(document).ready(function() {
       hexList.push(hex);
     }
 
-    if ( $("#randomize input[type=checkbox]").is(':checked') ) {
+    if ($("#randomize input[type=checkbox]").is(':checked')) {
       shuffle(hexList);
       for (var i = 0; i < quantity; i++) {
         newSwatchTemplate += '<li style="background-color:' + hexList[i] + '"><span>' + hexList[i] + '</span></li>';
@@ -78,6 +79,8 @@ $(document).ready(function() {
 
     $("#generated-swatches").append(newSwatchTemplate);
 
+    renderAllSVGSwatches(svgSwatchContainer, hexList);
+
     outputHexList();
   }
 
@@ -86,14 +89,60 @@ $(document).ready(function() {
 
     var hexListTemplate = [];
     for (var i = 0; i < quantity; i++) {
-      hexListTemplate += '<li><span class="swatch" style="background:' + hexList[i] +'"></span>"' + hexList[i] + '"<span class="comma">,</span>&nbsp;</li>';
+      hexListTemplate += '<li><span class="swatch" style="background:' + hexList[i] + '"></span>"' + hexList[i] + '"<span class="comma">,</span>&nbsp;</li>';
     }
 
     $("#hex-values-box").append(hexListTemplate);
   }
 
+  function renderSVGSwatch(node, color, x, y) {
+    const rectElem = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect"
+    );
+
+    rectElem.setAttribute("width", "50");
+    rectElem.setAttribute("height", "50");
+    rectElem.setAttribute("fill", color);
+    rectElem.setAttribute("x", x);
+    rectElem.setAttribute("y", y);
+
+    return node.appendChild(rectElem);
+  }
+
+  function renderAllSVGSwatches(node, colors) {
+    const count = colors.length;
+    let svgHeight = 55;
+
+    // remove all existing swatches
+    node.innerHTML = "";
+
+    const svgElem = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
+    node.appendChild(svgElem);
+
+    let rectX = 0;
+    let rectY = 0;
+
+    for (i = 0; i < count; i++) {
+      rectX += 55;
+      if (i % 5 === 0) {
+        rectX = 0;
+        if (i >= 5) {
+          rectY += 55;
+        }
+        svgHeight += 55;
+      }
+      renderSVGSwatch(svgElem, colors[i], rectX, rectY);
+    }
+
+    svgElem.setAttribute("fill", "none");
+    svgElem.setAttribute("viewBox", "0 0 270 " + svgHeight);
+    svgElem.classList.add("svg-swatches");
+  }
+
   function removeThisSwatch(element) {
-    customSpectrum.splice( $(element).parent().attr("id"), 1 );
+    customSpectrum.splice($(element).parent().attr("id"), 1);
     $(".reset-swatches").show();
     getStartingSwatches();
     generateNewSwatches();
@@ -104,7 +153,7 @@ $(document).ready(function() {
     customSpectrum = ['#f1da0e', '#72bf44', '#00a8d4', '#5b2874', '#d61f26'];
     $("#item-count").val("12");
     quantity = 12;
-    rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
+    rainbow.setNumberRange(0, quantity == 1 ? quantity : quantity - 1);
   }
 
   function resetStartingSwatches() {
@@ -119,7 +168,7 @@ $(document).ready(function() {
   function incrementGeneratedSwatches() {
     $("#generated-swatches").children().remove();
     incrementValue();
-    rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
+    rainbow.setNumberRange(0, quantity == 1 ? quantity : quantity - 1);
     generateNewSwatches();
 
     $("#item-count").val(quantity);
@@ -128,36 +177,52 @@ $(document).ready(function() {
   function decrementValue() { quantity -= 1; };
 
   function decrementGeneratedSwatches() {
-    if ( quantity === 1 ) {
+    if (quantity === 1) {
       $("#hex-values-box").children().remove();
       $("#generated-swatches").children().remove();
       decrementValue();
       $("#item-count").val(quantity);
-    } else if ( quantity > 1 ) {
+    } else if (quantity > 1) {
       $("#generated-swatches").children().remove();
       decrementValue();
-      rainbow.setNumberRange(0, quantity == 1 ? quantity : quantity-1);
+      rainbow.setNumberRange(0, quantity == 1 ? quantity : quantity - 1);
       generateNewSwatches();
       $("#item-count").val(quantity);
     }
   }
 
   function generatedSwatchesFieldKeyup(element) {
-    if ( $(element).val() == '' ) {
+    if ($(element).val() == '') {
       quantity = 0;
     } else {
       quantity = parseInt($(element).val());
 
       $("#generated-swatches").children().remove();
-      rainbow.setNumberRange(0, quantity== 1 ? quantity : quantity-1);
+      rainbow.setNumberRange(0, quantity == 1 ? quantity : quantity - 1);
       generateNewSwatches();
     }
   }
 
   function onlyTwo() {
-    if ( $(".starting-swatch").length <= 2) {
+    if ($(".starting-swatch").length <= 2) {
       $(".starting-swatch > svg").hide();
     }
+  }
+
+  function setClipboard(text) {
+    var type = "text/plain";
+    var blob = new Blob([text], { type });
+    var data = [new ClipboardItem({ [type]: blob })];
+
+    navigator.clipboard.write(data).then(
+      function () { console.log("copied svg to clipboard"); }, /* success */
+      function () { console.log("copying failed"); } /* failure */
+    );
+  }
+
+  function clickToCopy() {
+    const svgstring = document.querySelector(".svg-swatches").outerHTML;
+    setClipboard(svgstring);
   }
 
   function initialize() {
@@ -174,12 +239,12 @@ $(document).ready(function() {
   ****************/
 
   // Add new starting swatches
-  $("button.add-starting-hex").on("click", function(){
+  $("button.add-starting-hex").on("click", function () {
     addNewStartingHex();
   });
 
   // Add new starting swatch with Return key
-  $('#add-starting-hex').on('keyup', function(e) {
+  $('#add-starting-hex').on('keyup', function (e) {
     if (e.which == 13) {
       $("button.add-starting-hex").click();
       getStartingSwatches();
@@ -187,42 +252,47 @@ $(document).ready(function() {
   });
 
   // Reset starting swatches
-  $("#resetSwatches").on("click", function(){
+  $("#resetSwatches").on("click", function () {
     resetStartingSwatches();
   });
 
   // Randomize Click
-  $('#randomize-check').change(function() {
+  $('#randomize-check').change(function () {
     generateNewSwatches();
   });
 
   // About dialog clicks
-  $(".info-dropdown").on("click", ".info-toggle", function() {
+  $(".info-dropdown").on("click", ".info-toggle", function () {
     $(".info-dropdown").addClass("open");
   });
 
-  $(".info-content").on("click", ".info-close", function() {
+  $(".info-content").on("click", ".info-close", function () {
     $(".info-dropdown").removeClass("open");
   });
 
   // Remove swatch from array
-  $("#starting-swatches").on("click", ".starting-swatch > svg", function() {
-    removeThisSwatch( $(this) );
+  $("#starting-swatches").on("click", ".starting-swatch > svg", function () {
+    removeThisSwatch($(this));
   });
 
   // Add Items
-  $(".add-item").click(function() {
+  $(".add-item").click(function () {
     incrementGeneratedSwatches();
   });
 
   // Subtract Items
-  $(".subtract-item").click(function() {
+  $(".subtract-item").click(function () {
     decrementGeneratedSwatches();
   });
 
+  // Copy SVGs
+  $("#copy-svgs").click(function () {
+    clickToCopy();
+  });
+
   // Item Count Field
-  $("#item-count").on('keyup', function() {
-    generatedSwatchesFieldKeyup( $(this) );
+  $("#item-count").on('keyup', function () {
+    generatedSwatchesFieldKeyup($(this));
   });
 
   // Dragula
@@ -231,15 +301,15 @@ $(document).ready(function() {
     delay: true
   });
 
-  drake.on("drop", function() {
+  drake.on("drop", function () {
     var getSpanText = $("#starting-swatches > div > span").text().split('#');
-    var newSwatchOrder = $.makeArray( getSpanText );
+    var newSwatchOrder = $.makeArray(getSpanText);
 
-    newSwatchOrder = $.grep(newSwatchOrder, function(value) {
+    newSwatchOrder = $.grep(newSwatchOrder, function (value) {
       return value != "";
     });
 
-    customSpectrum = newSwatchOrder.map(function(swatch){
+    customSpectrum = newSwatchOrder.map(function (swatch) {
       return "#" + swatch
     });
 
