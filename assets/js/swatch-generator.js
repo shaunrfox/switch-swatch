@@ -101,8 +101,8 @@ $(document).ready(function () {
       "rect"
     );
 
-    rectElem.setAttribute("width", "50");
-    rectElem.setAttribute("height", "50");
+    rectElem.setAttribute("width", "10");
+    rectElem.setAttribute("height", "10");
     rectElem.setAttribute("fill", color);
     rectElem.setAttribute("x", x);
     rectElem.setAttribute("y", y);
@@ -112,7 +112,7 @@ $(document).ready(function () {
 
   function renderAllSVGSwatches(node, colors) {
     const count = colors.length;
-    let svgHeight = 55;
+    let svgHeight = 10;
 
     // remove all existing swatches
     node.innerHTML = "";
@@ -125,19 +125,19 @@ $(document).ready(function () {
     let rectY = 0;
 
     for (i = 0; i < count; i++) {
-      rectX += 55;
-      if (i % 5 === 0) {
+      rectX += 10;
+      if (i % 10 === 0) {
         rectX = 0;
-        if (i >= 5) {
-          rectY += 55;
+        if (i >= 10) {
+          rectY += 10;
         }
-        svgHeight += 55;
+        svgHeight += 10;
       }
       renderSVGSwatch(svgElem, colors[i], rectX, rectY);
     }
 
     svgElem.setAttribute("fill", "none");
-    svgElem.setAttribute("viewBox", "0 0 270 " + svgHeight);
+    svgElem.setAttribute("viewBox", "0 0 100 " + svgHeight);
     svgElem.classList.add("svg-swatches");
   }
 
@@ -213,6 +213,8 @@ $(document).ready(function () {
     var type = "text/plain";
     var blob = new Blob([text], { type });
     var data = [new ClipboardItem({ [type]: blob })];
+
+    console.log(data);
 
     navigator.clipboard.write(data).then(
       function () { console.log("copied svg to clipboard"); }, /* success */
