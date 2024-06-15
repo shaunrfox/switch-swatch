@@ -1335,8 +1335,20 @@ ul {
   display: none;
   position: fixed;
   bottom: 10px;
-  width: 100px;
-  border: 1px solid black; }
+  width: 100px; }
+
+.section-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; }
+
+.button.copy-svgs {
+  position: relative; }
+  .button.copy-svgs::after {
+    content: attr(data-status);
+    position: absolute; }
+  .button.copy-svgs span.hide-text {
+    opacity: 0; }
 
 .hex-values-box {
   display: block;

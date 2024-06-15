@@ -6,6 +6,8 @@ $(document).ready(function () {
   hexList = [];
   var randomize = false;
   const svgSwatchContainer = document.querySelector("#svg-swatches-wrapper");
+  const copySVGButton = document.querySelector("#copy-svgs");
+  const copyStatus = document.querySelector(".copy-status");
 
   // Function to print out starting swatches
   function getStartingSwatches() {
@@ -214,11 +216,28 @@ $(document).ready(function () {
     var blob = new Blob([text], { type });
     var data = [new ClipboardItem({ [type]: blob })];
 
-    console.log(data);
-
     navigator.clipboard.write(data).then(
-      function () { console.log("copied svg to clipboard"); }, /* success */
-      function () { console.log("copying failed"); } /* failure */
+      // success
+      function () {
+        copyStatus.innerHTML = "✅ Copied!";
+        copySVGButton.setAttribute("disabled", true);
+        console.log("copied svg to clipboard");
+
+        setTimeout(function () {
+          copyStatus.innerHTML = "";
+          copySVGButton.removeAttribute("disabled");
+        }, 3000);
+      },
+
+      // failure
+      function () {
+        copyStatus.innerHTML = "❌ Copying failed!";
+        console.log("copying failed");
+
+        setTimeout(function () {
+          copyStatus.innerHTML = "";
+        }, 3000);
+      }
     );
   }
 

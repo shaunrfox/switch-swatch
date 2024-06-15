@@ -501,7 +501,23 @@ ul {
   position: fixed;
   bottom: 10px;
   width: 100px;
-  border: 1px solid black;
+}
+
+.section-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button.copy-svgs {
+  position: relative;
+  &::after {
+    content: attr(data-status);
+    position: absolute;
+  }
+  span.hide-text {
+    opacity: 0;
+  }
 }
 
 .hex-values-box {
